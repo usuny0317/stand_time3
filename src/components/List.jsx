@@ -1,45 +1,64 @@
+import { data, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const List = () => {
+const List = ({ datas, setData }) => {
+  const navigate = useNavigate("");
   // TODO: 샘플 데이터를 지우고 작성해주세요.
-  const SAMPLE_DATA = [
-    {
-      id: 1,
-      title: "할 일 1",
-      content: "할 일 1 내용",
-      isDone: false,
-    },
-    {
-      id: 2,
-      title: "할 일 2",
-      content: "할 일 2 내용",
-      isDone: true,
-    },
-    {
-      id: 3,
-      title: "할 일 3",
-      content: "할 일 3 내용",
-      isDone: false,
-    },
-  ];
+  // 지우고 state로 만들기
 
   const handleDone = (id) => {
     // TODO: 완료 처리
+    // 토글링
+    setData((data) => {
+      return data.map((da) => {
+        if (da.id === id) {
+          return { ...da, isDone: !da.isDone };
+        } else {
+          return da;
+        }
+      });
+    });
   };
 
   const handleDelete = (id) => {
     // TODO: 삭제 처리
+    setData((data) => {
+      return data.filter((dat) => dat.id !== id);
+    });
   };
 
   return (
     <StyledList>
-      {SAMPLE_DATA.map((item) => (
-        <StyledListItem key={item.id}>
+      {datas.map((item) => (
+        <StyledListItem
+          key={item.id}
+          onClick={() => {
+            navigate(`/detail/:${item.id}`, { state: { item } });
+          }}
+        >
           <StyledTitle>{item.title}</StyledTitle>
           <StyledContent>{item.content}</StyledContent>
-          <StyledStatus>{item.isDone ? "완료" : "미완료"}</StyledStatus>
-          <StyledButton>{item.isDone ? "취소" : "완료"}</StyledButton>
-          <StyledButton>삭제</StyledButton>
+          <StyledStatus
+            onClick={() => {
+              handleDone(item.id);
+            }}
+          >
+            {item.isDone ? "완료" : "미완료"}
+          </StyledStatus>
+          <StyledButton
+            onClick={() => {
+              handleDone(item.id);
+            }}
+          >
+            {item.isDone ? "취소" : "완료"}
+          </StyledButton>
+          <StyledButton
+            onClick={() => {
+              handleDelete(item.id);
+            }}
+          >
+            삭제
+          </StyledButton>
         </StyledListItem>
       ))}
     </StyledList>

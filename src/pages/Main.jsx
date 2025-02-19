@@ -1,16 +1,18 @@
 import styled from "styled-components";
 import Form from "../components/Form";
 import List from "../components/List";
+import { useState } from "react";
 
 const MainPage = () => {
+  const [datas, setData] = useState([]);
   return (
     <StContainer>
       <StHeader>
         <h1>내일배움캠프 스탠다드반 투두리스트</h1>
       </StHeader>
       <StMain>
-        <Form />
-        <List />
+        <Form datas={datas} setData={setData} />
+        <List datas={datas} setData={setData} />
       </StMain>
       <StFooter>
         <p>Copyright 2025 스파르타 내일배움캠프</p>

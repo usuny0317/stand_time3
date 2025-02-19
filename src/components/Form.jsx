@@ -1,18 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-const Form = () => {
+const Form = ({ datas, setData }) => {
+  const [title, setTitle] = useState();
+  const [text, setText] = useState();
+
+  const handleSubmit = (e) => {
+    console.log("제출 클릭됨");
+    e.preventDefault();
+
+    const newData = {
+      id: Date.now(),
+      title: title,
+      text: text,
+      isDone: false,
+    };
+    setData((data) => [...data, newData]);
+  };
   return (
-    <StyledForm>
+    <StyledForm
+      onSubmit={(e) => {
+        handleSubmit(e);
+        setTitle("");
+        setText("");
+      }}
+    >
       <StyledInput
         type="text"
         name="title"
         placeholder="할 일 제목을 입력하세요"
+        onChange={(e) => {
+          setTitle(e.target.value);
+        }}
       />
       <StyledInput
         type="text"
         name="content"
         placeholder="할 일 내용을 입력하세요"
+        onChange={(e) => {
+          setText(e.target.value);
+        }}
       />
       <StyledButton type="submit">추가</StyledButton>
     </StyledForm>

@@ -1,12 +1,18 @@
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const DetailPage = () => {
+  const location = useLocation();
+  const a = location.state;
+  console.log(location);
+  console.log(location.state);
+  console.log("", a);
   return (
     <StyledContainer>
       <StyledTitle>할 일 상세 페이지</StyledTitle>
-      <StyledText>할일 제목 : </StyledText>
-      <StyledText>할일 내용 : </StyledText>
-      <StyledText>할일 완료 여부 : </StyledText>
+      <StyledText>할일 제목 : {a.title} </StyledText>
+      <StyledText>할일 내용 : {a.text}</StyledText>
+      <StyledText>할일 완료 여부 : {a.isDone}</StyledText>
       <StyledButton>메인 페이지로 돌아가기</StyledButton>
     </StyledContainer>
   );
