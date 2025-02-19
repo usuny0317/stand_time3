@@ -1,9 +1,11 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const DetailPage = () => {
   const location = useLocation();
   const { title, text, isDone } = location.state;
+
+  const navigate = useNavigate();
 
   return (
     <StyledContainer>
@@ -11,7 +13,9 @@ const DetailPage = () => {
       <StyledText>할일 제목 : {title} </StyledText>
       <StyledText>할일 내용 : {text}</StyledText>
       <StyledText>할일 완료 여부 : {isDone ? "완료" : "미완료"}</StyledText>
-      <StyledButton>메인 페이지로 돌아가기</StyledButton>
+      <StyledButton onClick={() => navigate("/")}>
+        메인 페이지로 돌아가기
+      </StyledButton>
     </StyledContainer>
   );
 };

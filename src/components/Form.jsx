@@ -6,7 +6,6 @@ const Form = ({ datas, setData }) => {
   const [text, setText] = useState();
 
   const handleSubmit = (e) => {
-    console.log("제출 클릭됨");
     e.preventDefault();
 
     const newData = {
