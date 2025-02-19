@@ -33,7 +33,13 @@ const List = ({ datas, setData }) => {
         <StyledListItem
           key={item.id}
           onClick={() => {
-            navigate(`/detail/:${item.id}`, { state: { item } });
+            navigate(`/detail/:${item.id}`, {
+              state: {
+                title: item.title,
+                text: item.text,
+                isDone: item.isDone,
+              },
+            });
           }}
         >
           <StyledTitle>{item.title}</StyledTitle>
